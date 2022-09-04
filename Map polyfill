@@ -1,0 +1,21 @@
+const numbers=[1,2,3,4,5];
+
+const square= (element,index,array) => {
+  return element*2;
+}
+
+const squareNumbers = numbers.map(square);
+
+console.log(squareNumbers);
+
+Array.prototype.customMap = function (callback){
+  let newArray= [];
+  for(let i=0;i<this.length;i++){
+    newArray.push(callback(this[i],i,this));
+  }
+  return newArray;
+}
+
+const squareNumberscustom = numbers.customMap(square);
+
+console.log(squareNumberscustom);
