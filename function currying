@@ -1,0 +1,52 @@
+Currying is a technique to convert multiple arguments function into a single argument functions (unary functions) in a sequence.
+
+💡Note - While converting regular func to currying, 
+  Number of unary functions should be greater than or equal to Number of arguments of a regular function .
+  
+ 
+Two ways to perform currying :-
+1) Using Closures
+2) Using Bind
+
+
+const multiply = (a,b,c,d) => {
+  return a*b*c*d;
+}
+
+const prod = multiply(1,2,3,4);
+console.log(prod);
+//Using Closures
+const closcurry = (a)=>{
+  return (b)=> {
+    return (c)=> {
+      return (d)=> {
+        return a*b*c*d;
+      }
+    }
+  }
+}
+
+const prod1 = closcurry(1)(2)(3)(4);
+console.log(prod1);
+//Using bind 
+const prod2 = multiply.bind(this,1);
+const curr1 = prod2.bind(this,2);
+const curr2 = curr1.bind(this,3);
+const curr3 = curr2.bind(this,4);
+console.log(curr3());
+
+
+function curry(callback) {
+  return function curried(...args) {
+    if(args.length>=callback.length){
+      return callback(...args);
+    }else{
+      return (...nextarg) =>{
+        return curried(...args,...nextarg);
+      };
+    }
+  }
+}
+
+const product = curry(multiply);
+console.log(product(1)(2)(3)(4));
