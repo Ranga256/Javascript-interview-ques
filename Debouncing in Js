@@ -1,0 +1,64 @@
+>Debouncing is a technique used to improve the performance of applications by reducing the rate of functions call
+
+-> If the function is getting called continuously, We can delay the function call for some time 
+with the help of debouncing to optimize the performance of applications
+
+💡Other use cases :-
+->Continous button click event function call can be delay.
+->Resize of window event function call can be delay.
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scramble Words game</title>
+    <link rel="stylesheet" href="scramble.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</head>
+
+<body>
+    <div class="container" style="display: grid; place-items: center; min-height: 50vh;">
+        <div>
+            <label for="normalSearch">Normal Search</label>
+            <input id="normalSearch" onkeyup="normalFunction()" />
+        </div>
+        <div>
+            <label for="debounceSearch">Debouncing Search</label>
+            <input id="debounceSearch" onkeyup="debouncedFunction()" />
+        </div>
+    </div>
+    <script>
+        let normalCount = 0;
+        let debounceCount = 0;
+
+        const debounce = function (callback, delay) {
+            let timer;
+            return function () {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timer);
+                console.log(context, args);
+                timer = setTimeout(() => {
+                    callback.apply(context, args);
+                }, delay);
+            }
+        }
+
+        const searchData = () => {
+            debounceCount++;
+            const searchValue = document.getElementById("debounceSearch").value;
+            console.log("Debounce Search for....", searchValue, "count", debounceCount);
+        }
+
+        const debouncedFunction = debounce(searchData, 500);
+
+
+        const normalFunction = () => {
+            normalCount++;
+            const searchValue = document.getElementById("normalSearch").value;
+            console.log("Normal Search for....", searchValue, "count", normalCount);
+        }
+    </script>
+</body>
+
+</html>
