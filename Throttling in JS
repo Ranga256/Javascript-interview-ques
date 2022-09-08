@@ -1,0 +1,55 @@
+Throttling is a technique used to improve the performance of applications by limiting the rate of function calls.
+
+
+👉 If the function is getting called continuously, We can execute the function once in the given time interval
+with the help of Throttling to optimize the performance of applications.
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scramble Words game</title>
+    <link rel="stylesheet" href="scramble.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</head>
+
+<body>
+    <div class="container" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 20vh;">
+        <button class="button" onclick="normalButton()">Normal</button>
+        <button class="button" onclick="throtllingButton()">Throttled</button>
+    </div>
+    <script>
+        
+        const throttle = function (callback,interval){
+            let available=true;
+            return function (){
+                const context=this;
+                const args=arguments;
+                if(available){
+                    callback.apply(context,args);
+                    available=false;
+                    setTimeout(()=>{
+                        available=true;
+                    },interval)
+                }
+            }
+        }
+
+        let normalCount = 0;
+        let throttleCount = 0;
+
+        const normalButton = function () {
+            normalCount++
+            console.log("normal count...", normalCount);
+        }
+
+        const throttleShooting = function () {
+            throttleCount++
+            console.log("throttle count...", throttleCount);
+        }
+        const throtllingButton = throttle(throttleShooting,1000);
+        
+    </script>
+</body>
+
+</html>
