@@ -1,0 +1,14 @@
+let patientArray = [
+    {name: 'vivek', priority: 'low'},
+    {name: 'om', priority: 'high'}
+];
+
+function sortByPriority(){
+    let priority =['high','medium','low'];
+    patientArray.sort(function (a,b){
+        return priority.indexOf(a.priority)-priority.indexOf(b.priority);
+    })
+}
+
+sortByPriority();
+console.log(patientArray);
