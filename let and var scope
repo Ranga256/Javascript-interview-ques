@@ -1,0 +1,34 @@
+function letScope() {
+  let name = "Ranga";
+  function printName() {
+    if (name === "Ranga") {
+      let name = "KRSV";
+      console.log(name);
+    }
+    console.log(name);
+  }
+  printName();
+}
+letScope();
+
+Output:KRSV Ranga -> let scope is block scope where inside function(inside if) intialization overided and after 
+the block ended value became to original which is outer scope.
+
+
+function varScope() {
+  var player = "Virat";
+  function displayPlayer() {
+    if (player === "Virat") {
+      var player = "VK";
+      console.log(player);
+    }
+    console.log(player);
+  }
+  displayPlayer();
+}
+
+varScope();
+
+output: Undefined-> var variables are functional scope, When displayPlayer fn starts executing, Execution context of
+displayPlayer will be created in callstack and at the memory creation phase var variable player is initialized as undefined. 
+hence if condition will become false and It will print only undefined.
