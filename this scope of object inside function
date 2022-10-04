@@ -1,0 +1,21 @@
+function thisScope() {
+  const person = {
+    name: "Ranga",
+    displayName1: function () {
+      console.log("name1", this.name);
+    },
+    displayName2: () => {
+      console.log("name2", this.name);
+    },
+  };
+  person.displayName1();
+  person.displayName2();
+}
+thisScope();
+
+//Output: 
+name1 Ranga
+name2 undefined
+
+explanation: for display1 the scope of this is the object, where as for display2 the scope of this is global window object
+where there is no object in window scope, this is due to the scope of arrow function is global.
