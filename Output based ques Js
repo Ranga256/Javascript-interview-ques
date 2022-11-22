@@ -1,0 +1,94 @@
+1) const person = {
+    name: "Jayesh",
+    displayName1: function () {
+      console.log("name1", this.name);
+    },
+    displayName2: () => {
+      console.log("name2", this.name);
+    },
+  };
+  person.displayName1();
+  person.displayName2();
+  
+  Ans: (name1 Jayesh , name2) because arrow function inherits "this" from its outer function where "this" is window.
+  and window has by default property name that is used for setting or returning the name of a window and in above case window.name is empty string.
+  
+  In other compilers answer is B) name1 Jayesh , name2 undefined because arrow function inherits "this" from its outer function where "this" refers to global object.
+  
+  2) const value = { number: 10 };
+
+  const addition = (x = { ...value }) => {
+    console.log((x.number += 5));
+  };
+
+  addition();
+  addition();
+  addition(value);
+  addition(value);
+  
+  Ans: (15, 15, 15, 20) because when we call addition function 3rd time with passing value object as an argument, then x will take value as pass by reference and will update number property of original object ( value in this case ) to 15.  
+  Hence, while calling addition function 4th time will console 15 + 5 => 20.
+  
+  3) function makePerson() {
+    return {
+      userName: "Jayesh",
+      ref: this,
+    };
+  }
+
+  const person = makePerson();
+  console.log(person.ref.userName);
+  
+  Ans: (undefined) because "this" keyword in makePerson function will refer to the window object,
+  person.ref.userName is same as Window.userName and no property named with userName is present in window object, Hence It will console undefined.
+  
+  // We can get "Jayesh" as an output by doing small change in above question :-
+  function makePerson2() {
+    return {
+      userName: "Jayesh",
+      // Here, We have assigned a function to ref property of an object, and function's "this" will point to the returned object.
+      ref: function () {
+        return this;
+      },
+    };
+  }
+
+  const person2 = makePerson2();
+  console.log(person2.ref().userName); // Jayesh
+  
+  4)const user = {
+    userName: "Jayesh",
+    displayName: function () {
+      console.log(this.userName);
+    },
+  };
+
+  setTimeout(user.displayName, 1000);
+  
+  Ans: (undefined) because setTimeout is using user.displayName as a callback function rather than object method.
+  callback function's "this" will refer to the window object and It will console undefined as there is no property such as userName in the window object.   
+ 
+
+  //  We can get "Jayesh" as an output by wrapping the user.displayName() inside a function :-
+
+  setTimeout(function () {
+    user.displayName(); // Here, displayName is called by user object ( object method ). Hence, "this" will refer to user object.
+  }, 1000);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
