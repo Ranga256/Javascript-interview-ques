@@ -75,6 +75,9 @@
     user.displayName(); // Here, displayName is called by user object ( object method ). Hence, "this" will refer to user object.
   }, 1000);
   
+  5) To check particular property exits in object or not -> 'property name' in objname.
+  
+  6) To add property conditionally in obj -> const obj = { id: 1, name: Ranga, ...(bool && {salary: 5000})}.
   
   
   
