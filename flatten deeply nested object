@@ -1,0 +1,27 @@
+const obj = {
+    A: 12,
+    B: {
+        C: 22,
+        D: {
+            E: 32
+        }
+    },
+    F: [11,13]
+}
+
+function flatObject(obj, parent){
+    let res = {};
+    for(let key in obj){
+        if(typeof obj[key] == "object"){
+            res= {...res,
+                ...flatObject(obj[key], parent+key+".")
+            };
+        }else{
+            console.log(parent+key,obj[key]);
+            res[parent+key] = obj[key];
+        }
+    }
+    return res;
+}
+
+console.log(flatObject(obj,""));
