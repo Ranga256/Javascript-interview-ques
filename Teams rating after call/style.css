@@ -1,0 +1,30 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.fa {
+    font-size: 40px;
+}
+
+.fa-star-o:before {
+    content: "\f006";
+    color: #5f6368;
+}
+
+.fa-star:before {
+    content: "\f005";
+    color: rgb(0, 122, 204);
+}
+
+.star{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#display-star-value{
+    font-weight: bold;
+}
